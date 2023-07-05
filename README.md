@@ -19,7 +19,7 @@ To run this project locally follow these steps :
 2. Go to the project directory
 
 ```bash
-  cd Social-api
+  cd Store-e-commerce
 ```
 
 3. Install dependencies
@@ -31,7 +31,7 @@ To run this project locally follow these steps :
 4. Start the server
 
 ```bash
-  npm start
+  npm run dev
 ```
 
 ## Payment Method
