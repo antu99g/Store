@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { ProductList } from "../";
 import { ServerUrl, fetchProductById, fetchRelatedProducts } from "../../api";
 import { useSelector, useDispatch } from "react-redux";
@@ -47,6 +47,8 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
 
   const params = useParams();
 
+  const location = useLocation();
+
   const [product, setProduct] = useState<Product>();
 
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
@@ -87,6 +89,10 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
       setQuantity(1);
     }
   }, [isCartItem]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const increaseQuantity = () => {
     setQuantity((prevQty) => prevQty + 1);
