@@ -51,6 +51,6 @@ Visit site: [Store E-Commerce](https://store-e-commerce-0e37db.netlify.app)
 
 <img src="https://github.com/antu99g/Alarm-Clock/assets/114740896/be6b21f6-c7a7-4971-a7de-4645577ac153" alt="screenshot" height="150" width="250">
 <img src="https://github.com/antu99g/Alarm-Clock/assets/114740896/bbee7af9-6b5e-43d9-9151-308f5ad61086" alt="screenshot" height="150" width="250">
-<img src="https://user-images.githubusercontent.com/114740896/220888166-f6515017-6695-4b7e-a142-d9310dfb028f.png" alt="screenshot" height="150" width="250">
+<img src="https://github.com/antu99g/Store-e-commerce/assets/114740896/caad536a-73ee-40a1-97b4-8487526c4816" alt="screenshot" height="150" width="250">
 
-<img src="https://user-images.githubusercontent.com/114740896/220888166-f6515017-6695-4b7e-a142-d9310dfb028f.png" alt="screenshot" height="150" width="250">
+<img src="https://github.com/antu99g/Store-e-commerce/assets/114740896/fa066830-3707-48d2-9b61-22d30b8d1586" alt="screenshot" height="150" width="250">
