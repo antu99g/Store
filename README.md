@@ -45,12 +45,12 @@ Visit site: [Store E-Commerce](https://store-e-commerce-0e37db.netlify.app)
 
 ## Screenshots
 
-<img src="https://user-images.githubusercontent.com/114740896/220888054-7aee6192-d675-4d49-afa5-792fdd819e18.png" alt="screenshot" height="150" width="250">
-<img src="https://user-images.githubusercontent.com/114740896/220888166-f6515017-6695-4b7e-a142-d9310dfb028f.png" alt="screenshot" height="150" width="250">
-<img src="https://user-images.githubusercontent.com/114740896/220888166-f6515017-6695-4b7e-a142-d9310dfb028f.png" alt="screenshot" height="150" width="250">
+<img src="https://github.com/antu99g/Alarm-Clock/assets/114740896/bd76a811-0925-4ce3-a0c5-552985a2d174" alt="screenshot" height="150" width="250">
+<img src="https://github.com/antu99g/Alarm-Clock/assets/114740896/ea8de342-2fc1-47b4-a9e8-6791c2aea7b5" alt="screenshot" height="150" width="250">
+<img src="https://github.com/antu99g/Alarm-Clock/assets/114740896/a48583b4-07a1-4b67-b22b-8ccfbfd6a3eb" alt="screenshot" height="150" width="250">
 
-<img src="https://user-images.githubusercontent.com/114740896/220888054-7aee6192-d675-4d49-afa5-792fdd819e18.png" alt="screenshot" height="150" width="250">
-<img src="https://user-images.githubusercontent.com/114740896/220888166-f6515017-6695-4b7e-a142-d9310dfb028f.png" alt="screenshot" height="150" width="250">
+<img src="https://github.com/antu99g/Alarm-Clock/assets/114740896/be6b21f6-c7a7-4971-a7de-4645577ac153" alt="screenshot" height="150" width="250">
+<img src="https://github.com/antu99g/Alarm-Clock/assets/114740896/bbee7af9-6b5e-43d9-9151-308f5ad61086" alt="screenshot" height="150" width="250">
 <img src="https://user-images.githubusercontent.com/114740896/220888166-f6515017-6695-4b7e-a142-d9310dfb028f.png" alt="screenshot" height="150" width="250">
 
 <img src="https://user-images.githubusercontent.com/114740896/220888166-f6515017-6695-4b7e-a142-d9310dfb028f.png" alt="screenshot" height="150" width="250">
