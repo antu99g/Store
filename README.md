@@ -1,6 +1,6 @@
 # Store
 
-This is an e-commerce website built using react. This app uses a `nodeJS` api. Payment is integrated with stripe.
+This is an e-commerce website built using React in TypeScript. This app uses a `nodeJS` api. Payment is integrated with stripe.
 
 ## Tech Stack
 
