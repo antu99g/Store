@@ -4,7 +4,7 @@ This is an e-commerce website built using React in TypeScript. This app uses a `
 
 ## Tech Stack
 
-`React` `Redux Toolkit` `Tailwind CSS` `TypeScript`
+`React` `TypeScript` `Redux Toolkit` `Tailwind CSS`
 
 ## Features
 
