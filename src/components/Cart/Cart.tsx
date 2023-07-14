@@ -7,10 +7,6 @@ import { BsCartX } from "react-icons/bs";
 import { BiLoaderAlt } from "react-icons/bi";
 import { FaXmark } from "react-icons/fa6";
 
-interface PropType {
-  hideCartModal: () => void;
-}
-
 interface CartItemType {
   id: number;
   title: string;
@@ -24,6 +20,11 @@ interface CartItemType {
 
 interface CartState {
   cart: CartItemType[];
+  wishlist: string[];
+}
+
+interface PropType {
+  hideCartModal: () => void;
 }
 
 const Cart: React.FC<PropType> = ({ hideCartModal }) => {

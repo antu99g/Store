@@ -6,6 +6,7 @@ import {
   CategoryPage,
   ProductDetails,
   PaymentStatus,
+  Wishlist,
 } from "./components";
 
 const App: React.FC = () => {
@@ -52,6 +53,7 @@ const App: React.FC = () => {
             path="/product/:id"
             element={<ProductDetails showCartModal={showCartModal} />}
           />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/payment/:success" element={<PaymentStatus />} />
         </Routes>
       </div>

@@ -29,7 +29,11 @@ const CategoryPage: React.FC = () => {
   return (
     <div className="my-20">
       {products.length > 0 && (
-        <ProductList header={products[0].category} productList={products} />
+        <ProductList
+          header={products[0].category}
+          productList={products}
+          isCategorySection={true}
+        />
       )}
     </div>
   );

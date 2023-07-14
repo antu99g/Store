@@ -28,7 +28,11 @@ const Home: React.FC = () => {
 
       <Category />
 
-      <ProductList header="Popular Products" productList={popularProducts} />
+      <ProductList
+        header="Popular Products"
+        productList={popularProducts}
+        isCategorySection={false}
+      />
 
       <Newsletter />
 

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { FaRupeeSign } from "react-icons/fa";
+import { Product } from ".";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { ServerUrl, fetchAllCategories } from "../api";
 
-interface Product {
+interface ProductType {
   id: number;
   title: string;
   price: number;
@@ -16,17 +14,20 @@ interface Product {
 
 interface PropType {
   header?: string;
-  productList?: Product[];
+  productList?: ProductType[];
+  isCategorySection?: boolean;
 }
 
-const ProductList: React.FC<PropType> = ({ header, productList }) => {
-  const [products, setProducts] = useState<Product[]>(productList || []);
+const ProductList: React.FC<PropType> = ({
+  header,
+  productList,
+  isCategorySection,
+}) => {
+  const [products, setProducts] = useState<ProductType[]>(productList || []);
 
   const [sortMethod, setSortMethod] = useState<string>("Sort: Newest first");
 
   const [showsortOptions, setShowsortOptions] = useState<boolean>(false);
-
-  const [isCategorySection, setIsCategorySection] = useState<boolean>(false);
 
   const sortByIncreasingName = () => {
     if (productList) {
@@ -103,16 +104,6 @@ const ProductList: React.FC<PropType> = ({ header, productList }) => {
     }
   }, [productList]);
 
-  useEffect(() => {
-    (async () => {
-      if (header) {
-        const categoryList = await fetchAllCategories();
-        const allCategories = categoryList.map((category) => category.title);
-        setIsCategorySection(() => allCategories.includes(header));
-      }
-    })();
-  }, [header]);
-
   const toggleSortOptions = () => {
     setShowsortOptions((prevState) => !prevState);
   };
@@ -177,29 +168,7 @@ const ProductList: React.FC<PropType> = ({ header, productList }) => {
       <div className="w-full grid grid-cols-2 sm-list:grid-cols-3 md-list:grid-cols-4 gap-x-1 gap-y-7">
         {products &&
           products.map((product) => {
-            return (
-              <div
-                className="w-[15vw] min-w-[150px] flex flex-col justify-self-center"
-                key={product.id}
-              >
-                <div className="w-full px-2 py-5 bg-lightgrey overflow-hidden">
-                  <Link to={`/product/${product.id}`}>
-                    <img
-                      src={ServerUrl + product.image}
-                      alt={product.title}
-                      className="hover:scale-110 transition-all"
-                    />
-                  </Link>
-                </div>
-                <h4 className="mt-2 text-sm text-gray-700 text-ellipsis whitespace-nowrap overflow-hidden">
-                  {product.title}
-                </h4>
-                <h3 className="flex items-center">
-                  <FaRupeeSign />
-                  {product.price}
-                </h3>
-              </div>
-            );
+            return <Product product={product} key={product.id} />;
           })}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FiSearch, FiHeart } from "react-icons/fi";
 import { BsCart2 } from "react-icons/bs";
@@ -38,6 +38,8 @@ const Navbar: React.FC<PropType> = ({
   showSearchModal,
   hideSearchModal,
 }) => {
+  const navigate = useNavigate();
+
   const cart = useSelector((state: CartState) => state.cart);
 
   const [totalItems, setTotalItems] = useState<number>(0);
@@ -70,7 +72,7 @@ const Navbar: React.FC<PropType> = ({
           </Link>
 
           <FiSearch onClick={showSearchModal} />
-          <FiHeart />
+          <FiHeart onClick={() => navigate("/wishlist")} />
           <span className="relative cursor-pointer" onClick={showCartModal}>
             <BsCart2 />
             <span className="absolute -top-1.5 -right-1.5 px-1 text-[0.55rem] bg-purple rounded-full">

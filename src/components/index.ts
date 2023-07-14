@@ -10,4 +10,6 @@ export { default as ProductDetails } from "./ProductDetails/ProductDetails";
 export { default as PaymentStatus } from "./Payment/PaymentStatus";
 export { default as Category } from "./Category";
 export { default as ProductList } from "./ProductList";
+export { default as Product } from "./Product";
+export { default as Wishlist } from "./Wishlist/Wishlist";
 export { default as Search } from "./Search";
