@@ -25,7 +25,7 @@ interface CartItemType extends ProductType {
 
 interface PropType {
   product: ProductType;
-  showCartModal?: (state: boolean) => void;
+  showCartModal: (state: boolean) => void;
 }
 
 const Product: React.FC<PropType> = ({ product, showCartModal }) => {
@@ -87,7 +87,7 @@ const Product: React.FC<PropType> = ({ product, showCartModal }) => {
         </Link>
 
         <button
-          className="mr-auto px-1.5 py-px hover:py-0 flex items-center text-sm text-white bg-purple cursor-pointer rounded"
+          className="mr-auto px-1.5 py-px flex items-center text-sm text-white bg-purple cursor-pointer rounded"
           onClick={handleItemToCart}
         >
           {isCartItem ? (

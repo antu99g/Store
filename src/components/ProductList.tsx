@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Product } from ".";
+import { ItemSkeleton, Product } from ".";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 interface ProductType {
@@ -16,7 +16,7 @@ interface PropType {
   header?: string;
   productList?: ProductType[];
   showSortSection?: boolean;
-  showCartModal?: (state: boolean) => void;
+  showCartModal: (state: boolean) => void;
 }
 
 const ProductList: React.FC<PropType> = ({
@@ -31,9 +31,11 @@ const ProductList: React.FC<PropType> = ({
 
   const [showSortOptions, setShowSortOptions] = useState<boolean>(false);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const sortByIncreasingName = () => {
-    if (productList) {
-      const arrayToSort = [...productList];
+    if (products.length > 0) {
+      const arrayToSort = [...products];
       return arrayToSort.sort((a, b) => {
         const titleA = a.title.toLowerCase();
         const titleB = b.title.toLowerCase();
@@ -50,8 +52,8 @@ const ProductList: React.FC<PropType> = ({
   };
 
   const sortByDecreasingName = () => {
-    if (productList) {
-      const arrayToSort = [...productList];
+    if (products.length > 0) {
+      const arrayToSort = [...products];
       return arrayToSort.sort((a, b) => {
         const titleA = a.title.toLowerCase();
         const titleB = b.title.toLowerCase();
@@ -68,15 +70,15 @@ const ProductList: React.FC<PropType> = ({
   };
 
   const sortByIncreasingPrice = () => {
-    if (productList) {
-      const arrayToSort = [...productList];
+    if (products.length > 0) {
+      const arrayToSort = [...products];
       return arrayToSort.sort((a, b) => a.price - b.price);
     }
   };
 
   const sortByDecreasingPrice = () => {
-    if (productList) {
-      const arrayToSort = [...productList];
+    if (products.length > 0) {
+      const arrayToSort = [...products];
       return arrayToSort.sort((a, b) => b.price - a.price);
     }
   };
@@ -101,8 +103,10 @@ const ProductList: React.FC<PropType> = ({
   ];
 
   useEffect(() => {
+    setLoading(true);
     if (productList) {
       setProducts(productList);
+      setLoading(false);
     }
   }, [productList]);
 
@@ -122,7 +126,7 @@ const ProductList: React.FC<PropType> = ({
   };
 
   return (
-    <div className="w-full my-16 px-5 lg-list:px-5vw xl-list:px-10vw 2xl-list:px-15vw mb-20">
+    <div className="w-full my-16 px-5 lg-list:px-5vw xl-list:px-10vw 2xl-list:px-15vw">
       <div className="mb-4 md-list:mb-8 relative flex flex-col md-list:flex-row md-list:justify-between md-list:items-center">
         <h2
           className="relative after:content-[''] after:absolute after:-bottom-1 after:block after:w-10 after:h-1 md:after:mt-2 after:bg-purple uppercase tracking-wider"
@@ -154,6 +158,7 @@ const ProductList: React.FC<PropType> = ({
                         sortMethod === option.label ? "bg-gray-300" : ""
                       }`}
                       onClick={() => sortProducts(index)}
+                      key={index}
                     >
                       {option.label}
                     </li>
@@ -165,18 +170,22 @@ const ProductList: React.FC<PropType> = ({
         )}
       </div>
 
-      <div className="w-full grid grid-cols-2 sm-list:grid-cols-3 md-list:grid-cols-4 gap-x-1 gap-y-7">
-        {products &&
-          products.map((product) => {
-            return (
-              <Product
-                product={product}
-                showCartModal={showCartModal}
-                key={product.id}
-              />
-            );
-          })}
-      </div>
+      {loading ? (
+        <ItemSkeleton length="medium" />
+      ) : (
+        <div className="w-full grid grid-cols-2 sm-list:grid-cols-3 md-list:grid-cols-4 gap-x-1 gap-y-7">
+          {products &&
+            products.map((product) => {
+              return (
+                <Product
+                  product={product}
+                  showCartModal={showCartModal}
+                  key={product.id}
+                />
+              );
+            })}
+        </div>
+      )}
     </div>
   );
 };

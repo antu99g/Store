@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ProductList } from "../";
 import { useParams } from "react-router-dom";
 import { fetchCategoryProducts } from "../../api";
@@ -19,9 +19,10 @@ interface PropType {
 
 const CategoryPage: React.FC<PropType> = ({ showCartModal }) => {
   const params = useParams();
+
   const [products, setProducts] = useState<Product[]>([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     (async () => {
       if (params.categoryId) {
         const response = await fetchCategoryProducts(params.categoryId);
