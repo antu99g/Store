@@ -49,7 +49,7 @@ const Product: React.FC<PropType> = ({ product }) => {
 
   return (
     <div className="w-[15vw] min-w-[150px] flex flex-col justify-self-center">
-      <div className="w-full px-2 py-5 relative bg-stone-200 overflow-hidden rounded-lg">
+      <div className="w-full px-2 py-4 md-list:py-5 relative bg-stone-200 overflow-hidden rounded-lg">
         {isInWishlist ? (
           <FaHeart className={likeBtnStyles} onClick={removeItemFromWishlist} />
         ) : (

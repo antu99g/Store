@@ -22,7 +22,7 @@ const Wishlist: React.FC = () => {
       <ProductList
         header={"Wishlist"}
         productList={wishlist}
-        isCategorySection={true}
+        showSortSection={true}
       />
     </div>
   );

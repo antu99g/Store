@@ -32,7 +32,7 @@ const CategoryPage: React.FC = () => {
         <ProductList
           header={products[0].category}
           productList={products}
-          isCategorySection={true}
+          showSortSection={true}
         />
       )}
     </div>

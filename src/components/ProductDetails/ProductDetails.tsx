@@ -231,7 +231,7 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
       <ProductList
         header="Related Products"
         productList={relatedProducts}
-        isCategorySection={false}
+        showSortSection={false}
       />
     </div>
   );

@@ -35,7 +35,7 @@ const Home: React.FC<PropType> = ({ isModalVisible }) => {
       <ProductList
         header="Popular Products"
         productList={popularProducts}
-        isCategorySection={false}
+        showSortSection={false}
       />
 
       <Newsletter />
