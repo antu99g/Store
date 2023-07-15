@@ -22,7 +22,7 @@ To run this project locally follow these steps :
 1. Clone the project
 
 ```bash
-  git clone https://github.com/antu99g/Store-e-commerce
+  git clone https://github.com/antu99g/Store-e-commerce.git
 ```
 
 2. Go to the project directory
