@@ -8,7 +8,7 @@ import {
 
 const Newsletter: React.FC = () => {
   return (
-    <div className="w-full my-10 py-10 flex flex-col items-center bg-[url('newsletter-bg.jpg')] bg-lightgrey bg-cover">
+    <div className="w-full my-10 py-10 flex flex-col items-center bg-[url('newsletter-bg.jpg')] bg-stone-200 bg-cover">
       <h6 className="text-gray-500 font-semibold">NEWSLETTER</h6>
       <h3 className="mt-1 mb-2">SIGN UP FOR LATEST UPDATES AND OFFERS</h3>
       <form className="flex">

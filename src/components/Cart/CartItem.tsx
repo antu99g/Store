@@ -46,7 +46,7 @@ const CartItem: React.FC<PropType> = ({ item }) => {
 
   return (
     <div className="w-full flex">
-      <div className="h-min w-1/5 mr-2 bg-lightgrey">
+      <div className="h-min w-1/5 mr-2 bg-stone-200">
         <img src={ServerUrl + item.image} alt={item.title} />
       </div>
       <div className="w-4/5 flex flex-col">

@@ -15,7 +15,6 @@ export default {
       backgroundColor: {
         purple: "#8e2de2",
         grey: "rgba(0, 0, 0, 0.5)",
-        lightgrey: "rgba(0, 0, 0, 0.05)",
       },
       padding: {
         "5vw": "5vw",

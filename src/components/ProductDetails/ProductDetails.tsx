@@ -123,7 +123,7 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
   return (
     <div className="w-full pt-24">
       <div className="w-full mx-auto px-5vw md:px-10vw lg:px-[15vw] flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start">
-        <div className="w-[47%] mb-5 md:mb-0 grid place-content-center bg-lightgrey">
+        <div className="w-[47%] mb-5 md:mb-0 grid place-content-center bg-stone-200">
           <img src={ServerUrl + product?.image} alt={product?.title} />
         </div>
 

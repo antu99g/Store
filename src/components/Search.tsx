@@ -50,7 +50,7 @@ const Search: React.FC<PropType> = ({ hideSearchModal }) => {
           return (
             <Link to={`/product/${product.id}`} onClick={hideSearchModal}>
               <div className="py-2 px-2 md-list:px-3 flex items-center bg-white rounded-md">
-                <div className="w-[8%] min-w-[40px] mr-2 md:mr-3 bg-lightgrey">
+                <div className="w-[8%] min-w-[40px] mr-2 md:mr-3 bg-stone-200">
                   <img src={ServerUrl + product.image} alt="asdf" />
                 </div>
 
