@@ -39,7 +39,7 @@ interface CartItemType extends ProductType {
 }
 
 interface PropType {
-  showCartModal: () => void;
+  showCartModal: (state: boolean) => void;
 }
 
 const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
@@ -60,8 +60,6 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
   const [relatedProducts, setRelatedProducts] = useState<ProductType[]>([]);
 
   const [quantity, setQuantity] = useState<number>(1);
-
-  // const [isCartItem, setIsCartItem] = useState<boolean>(false);
 
   const presentIsCart = cart.filter((item) => item.id === Number(productId));
 
@@ -95,11 +93,6 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
       }
     })();
   }, [productId]);
-
-  // useEffect(() => {
-  //   const checkCart = cart.find((item) => item.id === Number(productId));
-  //   setIsCartItem(() => (checkCart ? true : false));
-  // }, [cart, productId]);
 
   useEffect(() => {
     if (isCartItem) {
@@ -176,7 +169,7 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
             <FaRupeeSign />
             {product?.price}
           </h2>
-          <p className="my-3 md:max-xl-list:my-1 text-gray-600 text-[0.8rem] md:max-xl-list:text-xs">
+          <p className="my-3 md:max-xl-list:my-1 text-gray-600 text-[0.8rem] md:max-xl-list:text-2xs">
             {product?.description}
           </p>
 

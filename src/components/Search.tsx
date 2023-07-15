@@ -4,7 +4,7 @@ import { ServerUrl, fetchSearchedProducts } from "../api";
 import { FaXmark } from "react-icons/fa6";
 
 interface PropType {
-  hideSearchModal: () => void;
+  showSearchModal: (state: boolean) => void;
 }
 
 interface SearchedProductType {
@@ -14,7 +14,7 @@ interface SearchedProductType {
   config: string;
 }
 
-const Search: React.FC<PropType> = ({ hideSearchModal }) => {
+const Search: React.FC<PropType> = ({ showSearchModal }) => {
   const [searchedProducts, setSearchedProducts] = useState<
     SearchedProductType[]
   >([]);
@@ -39,7 +39,7 @@ const Search: React.FC<PropType> = ({ hideSearchModal }) => {
         />
         <FaXmark
           className="absolute top-1/4 md:top-1/5 -right-8 md:-right-10 text-2xl hover:bg-white hover:p-1 rounded-full cursor-pointer"
-          onClick={hideSearchModal}
+          onClick={() => showSearchModal(false)}
         />
       </div>
 
@@ -48,7 +48,10 @@ const Search: React.FC<PropType> = ({ hideSearchModal }) => {
       <div className="w-[80vw] md-list:w-[60vw] lg:w-[45vw] mx-auto grow flex flex-col gap-y-4 overflow-y-auto">
         {searchedProducts.map((product) => {
           return (
-            <Link to={`/product/${product.id}`} onClick={hideSearchModal}>
+            <Link
+              to={`/product/${product.id}`}
+              onClick={() => showSearchModal(false)}
+            >
               <div className="py-2 px-2 md-list:px-3 flex items-center bg-white rounded-md">
                 <div className="w-[8%] min-w-[40px] mr-2 md:mr-3 bg-stone-200">
                   <img src={ServerUrl + product.image} alt="asdf" />

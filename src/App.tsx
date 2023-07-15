@@ -14,49 +14,58 @@ const App: React.FC = () => {
 
   const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
 
-  const showCartModal = () => {
-    setIsCartVisible(true);
+  const showCartModal = (state: boolean) => {
+    if (typeof state === "boolean") {
+      setIsCartVisible(state);
+    } else {
+      setIsCartVisible((prevState) => !prevState);
+    }
   };
 
-  const hideCartModal = () => {
-    setIsCartVisible(false);
-  };
-
-  const showSearchModal = () => {
-    setIsSearchVisible(true);
-  };
-
-  const hideSearchModal = () => {
-    setIsSearchVisible(false);
+  const showSearchModal = (state: boolean) => {
+    if (typeof state === "boolean") {
+      setIsSearchVisible(state);
+    } else {
+      setIsSearchVisible((prevState) => !prevState);
+    }
   };
 
   return (
     <>
       <div
-        className={`w-screen min-h-screen relative font-sans text-xs overflow-x-hidden ${
+        className={`w-screen min-h-screen relative font-sans text-2xs overflow-x-hidden ${
           (isCartVisible || isSearchVisible) && "h-screen overflow-y-hidden"
         }`}
       >
         <Navbar
           isCartVisible={isCartVisible}
           showCartModal={showCartModal}
-          hideCartModal={hideCartModal}
           isSearchVisible={isSearchVisible}
           showSearchModal={showSearchModal}
-          hideSearchModal={hideSearchModal}
         />
 
         <Routes>
           <Route
             path="/"
-            element={<Home isModalVisible={isCartVisible || isSearchVisible} />}
+            element={
+              <Home
+                isModalVisible={isCartVisible || isSearchVisible}
+                showCartModal={showCartModal}
+              />
+            }
           />
-          <Route path="/category/:categoryId" element={<CategoryPage />} />
+          <Route
+            path="/category/:categoryId"
+            element={<CategoryPage showCartModal={showCartModal} />}
+          />
           <Route
             path="/product/:id"
             element={<ProductDetails showCartModal={showCartModal} />}
           />
-          <Route path="/wishlist" element={<Wishlist />} />
+          <Route
+            path="/wishlist"
+            element={<Wishlist showCartModal={showCartModal} />}
+          />
           <Route path="/payment/:success" element={<PaymentStatus />} />
         </Routes>
       </div>

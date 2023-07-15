@@ -65,16 +65,16 @@ const CartItem: React.FC<PropType> = ({ item }) => {
           <button className="px-1.5 bg-gray-100" onClick={decreaseQuantity}>
             -
           </button>
-          <span className="px-3 text-xs">{item.quantity}</span>
+          <span className="px-3 text-2xs">{item.quantity}</span>
           <button className="px-1.5 bg-gray-100" onClick={increaseQuantity}>
             +
           </button>
         </span>
 
-        <div className="flex items-center text-xs text-purple">
+        <div className="flex items-center text-2xs text-purple">
           <span>{item.quantity}</span>
           <span className="mx-1">
-            <FaXmark className="text-xs" />
+            <FaXmark className="text-2xs" />
           </span>
           <span>{item.price}</span>
         </div>

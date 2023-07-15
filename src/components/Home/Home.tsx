@@ -14,9 +14,10 @@ interface Product {
 
 interface PropType {
   isModalVisible: boolean;
+  showCartModal: (state: boolean) => void;
 }
 
-const Home: React.FC<PropType> = ({ isModalVisible }) => {
+const Home: React.FC<PropType> = ({ isModalVisible, showCartModal }) => {
   const [popularProducts, setPopularProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const Home: React.FC<PropType> = ({ isModalVisible }) => {
         header="Popular Products"
         productList={popularProducts}
         showSortSection={false}
+        showCartModal={showCartModal}
       />
 
       <Newsletter />

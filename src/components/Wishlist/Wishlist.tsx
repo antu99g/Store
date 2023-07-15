@@ -12,7 +12,11 @@ interface ProductType {
   description: string;
 }
 
-const Wishlist: React.FC = () => {
+interface PropType {
+  showCartModal?: (state: boolean) => void;
+}
+
+const Wishlist: React.FC<PropType> = ({ showCartModal }) => {
   const wishlist = useSelector(
     (state: { wishlist: ProductType[] }) => state.wishlist
   );
@@ -23,6 +27,7 @@ const Wishlist: React.FC = () => {
         header={"Wishlist"}
         productList={wishlist}
         showSortSection={true}
+        showCartModal={showCartModal}
       />
     </div>
   );

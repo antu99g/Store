@@ -23,20 +23,16 @@ interface CartState {
 
 interface PropType {
   isCartVisible: boolean;
-  showCartModal: () => void;
-  hideCartModal: () => void;
+  showCartModal: (state: boolean) => void;
   isSearchVisible: boolean;
-  showSearchModal: () => void;
-  hideSearchModal: () => void;
+  showSearchModal: (state: boolean) => void;
 }
 
 const Navbar: React.FC<PropType> = ({
   isCartVisible,
   showCartModal,
-  hideCartModal,
   isSearchVisible,
   showSearchModal,
-  hideSearchModal,
 }) => {
   const navigate = useNavigate();
 
@@ -73,7 +69,10 @@ const Navbar: React.FC<PropType> = ({
 
           <FiSearch onClick={showSearchModal} />
           <FiHeart onClick={() => navigate("/wishlist")} />
-          <span className="relative cursor-pointer" onClick={showCartModal}>
+          <span
+            className="relative cursor-pointer"
+            onClick={() => showCartModal(true)}
+          >
             <BsCart2 />
             <span className="absolute -top-1.5 -right-1.5 px-1 text-[0.55rem] bg-purple rounded-full">
               {totalItems}
@@ -82,9 +81,9 @@ const Navbar: React.FC<PropType> = ({
         </div>
       </nav>
 
-      {isCartVisible && <Cart hideCartModal={hideCartModal} />}
+      {isCartVisible && <Cart showCartModal={showCartModal} />}
 
-      {isSearchVisible && <Search hideSearchModal={hideSearchModal} />}
+      {isSearchVisible && <Search showSearchModal={showSearchModal} />}
     </>
   );
 };

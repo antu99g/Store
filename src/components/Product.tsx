@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { addItem } from "../store/slices/cartSlice";
 import {
   addToWishlist,
   removeFromWishlist,
 } from "../store/slices/wishlistSlice";
 import { ServerUrl } from "../api";
-import { FaRupeeSign, FaRegHeart, FaHeart } from "react-icons/fa";
+import { FaRupeeSign, FaRegHeart, FaHeart, FaPlus } from "react-icons/fa";
 
 interface ProductType {
   id: number;
@@ -18,11 +19,16 @@ interface ProductType {
   description: string;
 }
 
-interface PropType {
-  product: ProductType;
+interface CartItemType extends ProductType {
+  quantity: number;
 }
 
-const Product: React.FC<PropType> = ({ product }) => {
+interface PropType {
+  product: ProductType;
+  showCartModal?: (state: boolean) => void;
+}
+
+const Product: React.FC<PropType> = ({ product, showCartModal }) => {
   const wishlist = useSelector(
     (state: { wishlist: ProductType[] }) => state.wishlist
   );
@@ -30,6 +36,12 @@ const Product: React.FC<PropType> = ({ product }) => {
   const wishlistItemId = wishlist.filter((item) => item.id === product.id);
 
   const isInWishlist = wishlistItemId.length > 0;
+
+  const cart = useSelector((state: { cart: CartItemType[] }) => state.cart);
+
+  const cartItemId = cart.filter((item) => item.id === product.id);
+
+  const isCartItem = cartItemId.length > 0;
 
   const dispatch = useDispatch();
 
@@ -45,11 +57,21 @@ const Product: React.FC<PropType> = ({ product }) => {
     }
   };
 
-  const likeBtnStyles = "absolute top-2 right-2 z-2 text-slate-500";
+  const handleItemToCart = () => {
+    if (isCartItem) {
+      showCartModal(true);
+    } else {
+      const productToAdd = { ...product, quantity: 1 };
+      dispatch(addItem(productToAdd));
+      showCartModal(true);
+    }
+  };
+
+  const likeBtnStyles = "ml-auto text-slate-500";
 
   return (
     <div className="w-[15vw] min-w-[150px] flex flex-col justify-self-center">
-      <div className="w-full px-2 py-4 md-list:py-5 relative bg-stone-200 overflow-hidden rounded-lg">
+      <div className="w-full p-2 relative flex flex-col bg-stone-200 overflow-hidden rounded-lg">
         {isInWishlist ? (
           <FaHeart className={likeBtnStyles} onClick={removeItemFromWishlist} />
         ) : (
@@ -63,6 +85,20 @@ const Product: React.FC<PropType> = ({ product }) => {
             className="relative hover:scale-105 transition-all"
           />
         </Link>
+
+        <button
+          className="mr-auto px-1.5 py-px hover:py-0 flex items-center text-sm text-white bg-purple cursor-pointer rounded"
+          onClick={handleItemToCart}
+        >
+          {isCartItem ? (
+            "Added"
+          ) : (
+            <>
+              <FaPlus className="mr-px text-xs" />
+              <span>Add</span>
+            </>
+          )}
+        </button>
       </div>
 
       <h4 className="mt-2 text-sm text-gray-700 text-ellipsis whitespace-nowrap overflow-hidden">

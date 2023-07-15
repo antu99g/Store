@@ -7,7 +7,7 @@ export default {
         sans: ["Cabin", "sans-serif"],
       },
       fontSize: {
-        xs: "0.65rem",
+        "2xs": "0.65rem",
       },
       colors: {
         purple: "#8e2de2",

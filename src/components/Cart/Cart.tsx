@@ -24,10 +24,10 @@ interface CartState {
 }
 
 interface PropType {
-  hideCartModal: () => void;
+  showCartModal: (state: boolean) => void;
 }
 
-const Cart: React.FC<PropType> = ({ hideCartModal }) => {
+const Cart: React.FC<PropType> = ({ showCartModal }) => {
   const cart = useSelector((state: CartState) => state.cart);
 
   const subtotal = cart.reduce((total, item) => {
@@ -63,7 +63,7 @@ const Cart: React.FC<PropType> = ({ hideCartModal }) => {
           <h4>SOPPING CART</h4>
           <button
             className="flex items-center font-semibold text-[0.75rem] hover:text-red-600"
-            onClick={hideCartModal}
+            onClick={() => showCartModal(false)}
           >
             <FaXmark className="mr-0" />
             CLOSE
@@ -78,7 +78,7 @@ const Cart: React.FC<PropType> = ({ hideCartModal }) => {
             </span>
             <span
               className="py-1 px-4 bg-purple text-[0.75rem] text-white cursor-pointer"
-              onClick={hideCartModal}
+              onClick={() => showCartModal(false)}
             >
               RETURN TO SHOP
             </span>

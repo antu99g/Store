@@ -29,7 +29,7 @@ const Category: React.FC = () => {
             <img
               src={ServerUrl + category.image}
               alt={category.title}
-              className="w-11/12 md-list:aspect-video hover:scale-110 transition-all"
+              className="w-11/12 md-list:aspect-video hover:scale-110 transition-all rounded"
             />
           </Link>
         );

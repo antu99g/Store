@@ -16,12 +16,14 @@ interface PropType {
   header?: string;
   productList?: ProductType[];
   showSortSection?: boolean;
+  showCartModal?: (state: boolean) => void;
 }
 
 const ProductList: React.FC<PropType> = ({
   header,
   productList,
   showSortSection,
+  showCartModal,
 }) => {
   const [products, setProducts] = useState<ProductType[]>(productList || []);
 
@@ -166,7 +168,13 @@ const ProductList: React.FC<PropType> = ({
       <div className="w-full grid grid-cols-2 sm-list:grid-cols-3 md-list:grid-cols-4 gap-x-1 gap-y-7">
         {products &&
           products.map((product) => {
-            return <Product product={product} key={product.id} />;
+            return (
+              <Product
+                product={product}
+                showCartModal={showCartModal}
+                key={product.id}
+              />
+            );
           })}
       </div>
     </div>

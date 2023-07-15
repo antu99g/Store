@@ -13,7 +13,11 @@ interface Product {
   description: string;
 }
 
-const CategoryPage: React.FC = () => {
+interface PropType {
+  showCartModal?: (state: boolean) => void;
+}
+
+const CategoryPage: React.FC<PropType> = ({ showCartModal }) => {
   const params = useParams();
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -33,6 +37,7 @@ const CategoryPage: React.FC = () => {
           header={products[0].category}
           productList={products}
           showSortSection={true}
+          showCartModal={showCartModal}
         />
       )}
     </div>
