@@ -1,34 +1,38 @@
 import React, { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 
-const Banner: React.FC = () => {
-  const bannerItems = [
-    {
-      label: "TRebel Airdopes 141 | With ENxTM Technology",
-      image: "earbuds-prod-1.webp",
-      background: "#19A7CE, #B0DAFF",
-      text: "rgb(6 182 212)",
-    },
-    {
-      label: "boAt Rockerz 450 | Wireless Headphone",
-      image: "headphone-prod-1.webp",
-      background: "#F24C3D, #F29727",
-      text: "rgb(75 85 99)",
-    },
-    {
-      label: "boAt Vertex | Smartwatch with Fitness Trackers",
-      image: "watch-prod-3.webp",
-      background: "#526D82, #9DB2BF",
-      text: "rgb(71 85 105)",
-    },
-    {
-      label: "Rockerz 550 | Over Ear Bluetooth Headphone",
-      image: "headphone-prod-5.webp",
-      background: "#45CFDD, #FFFEC4",
-      text: "rgb(20 184 166)",
-    },
-  ];
+interface PropType {
+  isModalVisible: boolean;
+}
 
+const bannerItems = [
+  {
+    label: "TRebel Airdopes 141 | With ENxTM Technology",
+    image: "earbuds-prod-1.webp",
+    background: "#19A7CE, #B0DAFF",
+    text: "rgb(6 182 212)",
+  },
+  {
+    label: "boAt Rockerz 450 | Wireless Headphone",
+    image: "headphone-prod-1.webp",
+    background: "#F24C3D, #F29727",
+    text: "rgb(75 85 99)",
+  },
+  {
+    label: "boAt Vertex | Smartwatch with Fitness Trackers",
+    image: "watch-prod-3.webp",
+    background: "#526D82, #9DB2BF",
+    text: "rgb(71 85 105)",
+  },
+  {
+    label: "Rockerz 550 | Over Ear Bluetooth Headphone",
+    image: "headphone-prod-5.webp",
+    background: "#45CFDD, #FFFEC4",
+    text: "rgb(20 184 166)",
+  },
+];
+
+const Banner: React.FC<PropType> = ({ isModalVisible }) => {
   const bgRef = useRef<HTMLDivElement>(null);
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -37,27 +41,27 @@ const Banner: React.FC = () => {
 
   const imageRef = useRef<HTMLImageElement>(null);
 
-  const isRemovingBannerRef = useRef<boolean>(false);
-
   const [currentBanner, setCurrentBanner] = useState<number>(0);
 
-  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const isAnimatingRef = useRef<boolean>(false);
+
+  const isPausedRef = useRef<boolean>(false);
 
   const removeCurrentBanner = () => {
-    if (!isPaused && !isRemovingBannerRef.current) {
-      isRemovingBannerRef.current = true;
+    if (!isPausedRef.current && !isAnimatingRef.current) {
+      isAnimatingRef.current = true;
       gsap.to([bgRef.current], {
-        delay: 4,
+        delay: 3,
         duration: 0.3,
         x: "100vw",
         ease: "Power1.in",
         onComplete: () => {
+          isAnimatingRef.current = false;
           changeBanner();
-          isRemovingBannerRef.current = false;
         },
       });
       gsap.to([contentRef.current], {
-        delay: 4,
+        delay: 3,
         duration: 0.1,
         opacity: 0,
       });
@@ -107,7 +111,13 @@ const Banner: React.FC = () => {
       duration: 2.5,
       opacity: 1,
       ease: "Power4.out",
-      onComplete: removeCurrentBanner,
+      onComplete: () => {
+        console.log("end", { isModalVisible });
+
+        if (!isPausedRef.current && !isModalVisible) {
+          removeCurrentBanner();
+        }
+      },
     });
   };
 
@@ -116,21 +126,31 @@ const Banner: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!isPaused && !isRemovingBannerRef.current) {
+    if (isModalVisible) {
+      isPausedRef.current = true;
+    } else {
+      isPausedRef.current = false;
       removeCurrentBanner();
     }
-  }, [isPaused]);
+  }, [isModalVisible]);
 
   return (
-    <div className="h-[73vh] w-full relative overflow-hidden">
+    <div
+      className="h-[73vh] w-full relative overflow-hidden"
+      onMouseEnter={() => {
+        isPausedRef.current = true;
+      }}
+      onMouseLeave={() => {
+        isPausedRef.current = false;
+        removeCurrentBanner();
+      }}
+    >
       <div
         ref={bgRef}
         className="h-full w-full absolute z-1 left-0 top-0"
         style={{
           backgroundImage: `linear-gradient(to right, ${bannerItems[currentBanner].background})`,
         }}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
       />
       <div
         ref={contentRef}

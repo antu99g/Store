@@ -47,7 +47,10 @@ const App: React.FC = () => {
         />
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={<Home isModalVisible={isCartVisible || isSearchVisible} />}
+          />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
           <Route
             path="/product/:id"

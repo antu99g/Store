@@ -12,7 +12,11 @@ interface Product {
   description: string;
 }
 
-const Home: React.FC = () => {
+interface PropType {
+  isModalVisible: boolean;
+}
+
+const Home: React.FC<PropType> = ({ isModalVisible }) => {
   const [popularProducts, setPopularProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -24,7 +28,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="pt-12">
-      <Banner />
+      <Banner isModalVisible={isModalVisible} />
 
       <Category />
 
