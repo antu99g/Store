@@ -9,16 +9,22 @@ import {
   decreaseQty,
 } from "../../store/slices/cartSlice";
 import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../store/slices/wishlistSlice";
+import {
   FaShoppingCart,
   FaRupeeSign,
   FaFacebookF,
   FaTwitter,
   FaLinkedinIn,
   FaPinterest,
+  FaHeart,
+  FaRegHeart,
 } from "react-icons/fa";
 import { GrInstagram } from "react-icons/gr";
 
-interface Product {
+interface ProductType {
   id: number;
   title: string;
   price: number;
@@ -28,12 +34,8 @@ interface Product {
   description: string;
 }
 
-interface CartItemType extends Product {
+interface CartItemType extends ProductType {
   quantity: number;
-}
-
-interface CartState {
-  cart: CartItemType[];
 }
 
 interface PropType {
@@ -41,48 +43,74 @@ interface PropType {
 }
 
 const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
-  const cart = useSelector((state: CartState) => state.cart);
+  const cart = useSelector((state: { cart: CartItemType[] }) => state.cart);
+
+  const wishlist = useSelector(
+    (state: { wishlist: ProductType[] }) => state.wishlist
+  );
 
   const dispatch = useDispatch();
 
-  const params = useParams();
+  const { id: productId } = useParams();
 
   const location = useLocation();
 
-  const [product, setProduct] = useState<Product>();
+  const [product, setProduct] = useState<ProductType>();
 
-  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [relatedProducts, setRelatedProducts] = useState<ProductType[]>([]);
 
   const [quantity, setQuantity] = useState<number>(1);
 
-  const [isCartItem, setIsCartItem] = useState<boolean>(false);
+  // const [isCartItem, setIsCartItem] = useState<boolean>(false);
+
+  const presentIsCart = cart.filter((item) => item.id === Number(productId));
+
+  const isCartItem = presentIsCart.length > 0;
+
+  const wishlistItemId = wishlist.filter(
+    (item) => item.id === Number(productId)
+  );
+
+  const isInWishlist = wishlistItemId.length > 0;
+
+  const addItemInWishlist = () => {
+    if (product) {
+      dispatch(addToWishlist(product));
+    }
+  };
+
+  const removeItemFromWishlist = () => {
+    if (product) {
+      dispatch(removeFromWishlist(product.id));
+    }
+  };
 
   useLayoutEffect(() => {
     (async () => {
-      if (params.id) {
-        const productDetails = await fetchProductById(params.id);
+      if (productId) {
+        const productDetails = await fetchProductById(productId);
         setProduct(productDetails);
-        const response = await fetchRelatedProducts(params.id);
+        const response = await fetchRelatedProducts(productId);
         setRelatedProducts(response);
       }
     })();
-  }, [params.id]);
+  }, [productId]);
 
-  useEffect(() => {
-    const checkCart = cart.find((item) => item.id === Number(params.id));
-    setIsCartItem(() => (checkCart ? true : false));
-  }, [cart, params.id]);
+  // useEffect(() => {
+  //   const checkCart = cart.find((item) => item.id === Number(productId));
+  //   setIsCartItem(() => (checkCart ? true : false));
+  // }, [cart, productId]);
 
   useEffect(() => {
     if (isCartItem) {
       const cartItemIndex = cart.findIndex(
-        (item) => item.id === Number(params.id)
+        (item) => item.id === Number(productId)
       );
       if (cartItemIndex !== -1) {
         setQuantity(cart[cartItemIndex].quantity);
       }
     }
-  }, [cart, isCartItem, params.id]);
+  }, [cart, isCartItem, productId]);
 
   useEffect(() => {
     if (!isCartItem) {
@@ -96,8 +124,8 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
 
   const increaseQuantity = () => {
     setQuantity((prevQty) => prevQty + 1);
-    if (isCartItem && params.id) {
-      dispatch(increaseQty(params.id));
+    if (isCartItem && productId) {
+      dispatch(increaseQty(productId));
       showCartModal();
     }
   };
@@ -105,8 +133,8 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity((prevQty) => prevQty - 1);
-      if (isCartItem && params.id) {
-        dispatch(decreaseQty(params.id));
+      if (isCartItem && productId) {
+        dispatch(decreaseQty(productId));
         showCartModal();
       }
     }
@@ -120,16 +148,28 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
     showCartModal();
   };
 
+  const likeBtnStyles =
+    "absolute top-1 right-1 md:top-3 md:right-3 z-2 text-lg md:text-2xl text-slate-500";
+
   return (
     <div className="w-full pt-24">
-      <div className="w-full mx-auto px-5vw md:px-10vw lg:px-[15vw] flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start">
-        <div className="w-[47%] mb-5 md:mb-0 grid place-content-center bg-stone-200">
+      <div className="w-full mx-auto px-5vw xl-list:px-10vw lg:px-[15vw] flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start">
+        <div className="w-10/12 md-list:w-[47%] mb-5 md:mb-0 relative grid place-content-center bg-stone-200 rounded-lg">
+          {isInWishlist ? (
+            <FaHeart
+              className={likeBtnStyles}
+              onClick={removeItemFromWishlist}
+            />
+          ) : (
+            <FaRegHeart className={likeBtnStyles} onClick={addItemInWishlist} />
+          )}
+
           <img src={ServerUrl + product?.image} alt={product?.title} />
         </div>
 
         <div className="w-5/6 md:w-1/2 flex flex-col">
-          <h1>{product?.title}</h1>
-          <p className="-mt-1.5 mb-2 md:max-xl-list:mb-0 font-medium text-base text-slate-600">
+          <h1 className="mb-4 md:mb-2 leading-7">{product?.title}</h1>
+          <p className="-mt-1.5 mb-2 md:max-xl-list:mb-0 font-medium text-base text-slate-600 leading-tight">
             {product?.config}
           </p>
           <h2 className="flex items-center">
