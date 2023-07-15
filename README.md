@@ -13,7 +13,7 @@ This is an e-commerce website built using React in TypeScript. This app uses a `
 - Added types using TypeScript
 - Uses own API (Node.js)
 - Payment integrated, with Stripe checkout
-- Added skeleton at all required components
+- Skeleton at all required components
 
 ## Run Locally
 
