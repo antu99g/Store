@@ -114,8 +114,6 @@ const ProductList: React.FC<PropType> = ({
       setSortMethod(sortOptions[optionIndex].label);
       const sortedList = sortOptions[optionIndex].method();
       if (sortedList) {
-        console.log(sortedList);
-
         setProducts(sortedList);
       }
     }

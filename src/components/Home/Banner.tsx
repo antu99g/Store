@@ -112,8 +112,6 @@ const Banner: React.FC<PropType> = ({ isModalVisible }) => {
       opacity: 1,
       ease: "Power4.out",
       onComplete: () => {
-        console.log("end", { isModalVisible });
-
         if (!isPausedRef.current && !isModalVisible) {
           removeCurrentBanner();
         }
