@@ -9,10 +9,10 @@ This is an e-commerce website built using React in TypeScript. This app uses a `
 ## Features
 
 - Responsive, supperted in all screen sizes
-- Added cart using redux store
+- Added cart and wishlist using redux store
 - Added types using TypeScript
-- Uses own API (Node.js)
 - Payment integrated, with Stripe checkout
+- Uses own API (Node.js)
 - Skeleton added at all required components
 
 ## Run Locally
