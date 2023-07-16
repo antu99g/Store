@@ -14,7 +14,7 @@ interface Product {
 }
 
 interface PropType {
-  showCartModal?: (state: boolean) => void;
+  showCartModal: (state: boolean) => void;
 }
 
 const CategoryPage: React.FC<PropType> = ({ showCartModal }) => {
@@ -22,11 +22,15 @@ const CategoryPage: React.FC<PropType> = ({ showCartModal }) => {
 
   const [products, setProducts] = useState<Product[]>([]);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
+    setLoading(true);
     (async () => {
       if (params.categoryId) {
         const response = await fetchCategoryProducts(params.categoryId);
         setProducts(response);
+        setLoading(false);
       }
     })();
   }, [params.categoryId]);
@@ -39,6 +43,7 @@ const CategoryPage: React.FC<PropType> = ({ showCartModal }) => {
           productList={products}
           showSortSection={true}
           showCartModal={showCartModal}
+          loading={loading}
         />
       )}
     </div>

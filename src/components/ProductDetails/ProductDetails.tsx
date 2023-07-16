@@ -62,9 +62,9 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
 
   const [quantity, setQuantity] = useState<number>(1);
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const [loadingProducts, setLoadingProducts] = useState<boolean>(false);
+  const [loadingProducts, setLoadingProducts] = useState<boolean>(true);
 
   const presentIsCart = cart.filter((item) => item.id === Number(productId));
 
@@ -235,16 +235,13 @@ const ProductDetails: React.FC<PropType> = ({ showCartModal }) => {
         )}
       </div>
 
-      {loadingProducts ? (
-        <ItemSkeleton length="small" />
-      ) : (
-        <ProductList
-          header="Related Products"
-          productList={relatedProducts}
-          showSortSection={false}
-          showCartModal={showCartModal}
-        />
-      )}
+      <ProductList
+        header="Related Products"
+        productList={relatedProducts}
+        showSortSection={false}
+        showCartModal={showCartModal}
+        loading={loadingProducts}
+      />
     </div>
   );
 };

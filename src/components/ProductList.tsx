@@ -17,6 +17,7 @@ interface PropType {
   productList?: ProductType[];
   showSortSection?: boolean;
   showCartModal: (state: boolean) => void;
+  loading?: boolean;
 }
 
 const ProductList: React.FC<PropType> = ({
@@ -24,14 +25,13 @@ const ProductList: React.FC<PropType> = ({
   productList,
   showSortSection,
   showCartModal,
+  loading,
 }) => {
   const [products, setProducts] = useState<ProductType[]>(productList || []);
 
   const [sortMethod, setSortMethod] = useState<string>("Sort: Newest first");
 
   const [showSortOptions, setShowSortOptions] = useState<boolean>(false);
-
-  const [loading, setLoading] = useState<boolean>(false);
 
   const sortByIncreasingName = () => {
     if (products.length > 0) {
@@ -103,10 +103,8 @@ const ProductList: React.FC<PropType> = ({
   ];
 
   useEffect(() => {
-    setLoading(true);
     if (productList) {
       setProducts(productList);
-      setLoading(false);
     }
   }, [productList]);
 

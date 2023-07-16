@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Banner,
-  Category,
-  ProductList,
-  Newsletter,
-  Footer,
-  ItemSkeleton,
-} from "..";
+import { Banner, Category, ProductList, Newsletter, Footer } from "..";
 import { fetchPopularProducts } from "../../api";
 
 interface Product {
@@ -27,7 +20,7 @@ interface PropType {
 const Home: React.FC<PropType> = ({ isModalVisible, showCartModal }) => {
   const [popularProducts, setPopularProducts] = useState<Product[]>([]);
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setLoading(true);
@@ -44,16 +37,13 @@ const Home: React.FC<PropType> = ({ isModalVisible, showCartModal }) => {
 
       <Category />
 
-      {loading ? (
-        <ItemSkeleton length="medium" />
-      ) : (
-        <ProductList
-          header="Popular Products"
-          productList={popularProducts}
-          showSortSection={false}
-          showCartModal={showCartModal}
-        />
-      )}
+      <ProductList
+        header="Popular Products"
+        productList={popularProducts}
+        showSortSection={false}
+        showCartModal={showCartModal}
+        loading={loading}
+      />
 
       <Newsletter />
 

@@ -62,7 +62,7 @@ const Navbar: React.FC<PropType> = ({
 
         <h1 className="md:-translate-x-1/2">STORE.</h1>
 
-        <div className="flex items-center gap-x-8 md:gap-x-5">
+        <div className="flex items-center gap-x-8 md:gap-x-6">
           <Link to="/" className="md:hidden">
             <HiHome size={16} />
           </Link>

@@ -32,7 +32,7 @@ const Category: React.FC = () => {
             <Link
               to={`/category/${category.categoryId}`}
               key={category.categoryId}
-              className="w-11/12 md-list:aspect-video rounded overflow-hidden"
+              className="w-11/12 md-list:aspect-video overflow-hidden"
             >
               <img
                 src={ServerUrl + category.image}
