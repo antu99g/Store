@@ -15,7 +15,7 @@ const SkeletonDetails: React.FC = () => {
         <div className="w-[65%] h-3 bg-gray-100 rounded-lg" />
         <div className="w-[65%] h-3 bg-gray-100 rounded-lg" />
         <div className="w-[40%] h-3 mt-5 bg-gray-100 rounded-lg" />
-        <div className="w-[40%] h-3 bg-gray-100 rounded-lg" />
+        <div className="w-[37%] h-3 bg-gray-100 rounded-lg" />
       </div>
     </>
   );
