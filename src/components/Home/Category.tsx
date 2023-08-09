@@ -12,7 +12,7 @@ interface Category {
 const Category: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setLoading(true);
